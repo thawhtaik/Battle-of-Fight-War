@@ -4,6 +4,8 @@
 #include "Target.h"
 #include "Attacker.h"
 
+#include "MapCoordinates.h"
+
 class WorldObject: public Target, public Attacker
 {
 
@@ -14,6 +16,10 @@ class WorldObject: public Target, public Attacker
 		int positionX, positionY;
 
 		int sizeX, sizeY;
+
+		int hitboxSizeX, hitboxSizeY;
+
+		virtual bool isPositionInObjectHitbox(MapCoordinates Position) = 0;
 
 		virtual void releaseWorldObject() = 0;
 

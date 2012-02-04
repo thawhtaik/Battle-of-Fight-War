@@ -13,7 +13,7 @@ LivingEntity::LivingEntity()
 
 	this->_currentFacing = ENTITY_FACING_SOUTH;
 
-	this->objectIndex = this->sizeX = this->sizeY = 0;
+	this->objectIndex = this->sizeX = this->sizeY = this->hitboxSizeX = this->hitboxSizeY = 0;
 }
 
 void LivingEntity::updateLifeStatus()

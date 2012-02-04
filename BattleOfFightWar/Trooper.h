@@ -27,6 +27,8 @@ class Trooper: public LivingEntity
 		Trooper();
 		Trooper(TrooperGraphics *NewTrooperGraphics);
 
+		bool isPositionInObjectHitbox(MapCoordinates Position);
+
 		void releaseWorldObject();
 
 		void initLivingEntityGraphics();

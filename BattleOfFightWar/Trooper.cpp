@@ -3,6 +3,9 @@
 Trooper::Trooper()
 {
 	this->sizeX = this->sizeY = TROOPER_BODY_SPRITE_SIZE_HALF;
+	
+	this->hitboxSizeX = TROOPER_BODY_SPRITE_SIZE_HALF;
+	this->hitboxSizeY = TROOPER_BODY_SPRITE_SIZE;
 
 	this->initLivingEntityGraphics();
 
@@ -44,4 +47,11 @@ void Trooper::releaseWorldObject()
 void Trooper::setCurrentPath(std::vector<MapCoordinates> NewPath)
 {
 	this->_CurrentPath = NewPath;
+}
+
+
+bool Trooper::isPositionInObjectHitbox(MapCoordinates Position)
+{
+	return !(Position.x > this->positionX + this->hitboxSizeX || Position.x < this->positionX ||		
+			Position.y > this->positionY + this->hitboxSizeY  || Position.y < (this->positionY - TROOPER_BODY_SPRITE_SIZE_HALF));
 }
