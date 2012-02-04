@@ -135,9 +135,7 @@ bool Projectile::_hasCollisionOnTile(MapTile* MapTile)
 
 		//Really it should be seeing if topLeft x, topLeft y, bottomRight x, or bottomRight y are outside the LivingEntity rectangle, but since
 		//our bullet is very small we'll just treat it as a point
-		if (!(this->Position.x > LivingEntity->positionX + LivingEntity->sizeX || this->Position.x < LivingEntity->positionX ||		
-			this->Position.y > LivingEntity->positionY + LivingEntity->sizeY || this->Position.y < LivingEntity->positionY)
-		) {
+		if (LivingEntity->isPositionInObjectHitbox(this->Position)) {
 			LivingEntity->damage();
 			this->_functional = false;
 
