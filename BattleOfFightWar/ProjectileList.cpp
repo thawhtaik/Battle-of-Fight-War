@@ -35,6 +35,8 @@ int ProjectileList::getSize()
 
 void ProjectileList::removeAtIndex(int projectileIndex)
 {
+	this->_Projectiles.at(projectileIndex)->releaseProjectile();
+	delete this->_Projectiles.at(projectileIndex);
 	this->_Projectiles.erase(this->_Projectiles.begin() + projectileIndex); //erases element index+1
 }
 
@@ -48,6 +50,7 @@ void ProjectileList::update()
 			continue;
 		}
 
+		this->_Projectiles.at(i)->releaseProjectile();
 		delete this->_Projectiles.at(i);
 		this->_Projectiles.erase(this->_Projectiles.begin() + i);
 	}

@@ -10,8 +10,8 @@ Bullet::Bullet(MapCoordinates NewPosition, int newFacing, int newAttackPower, in
 	this->_ProjectileSprite = Sprite::Sprite(
 		0, 
 		BULLET_SPRITESHEET_NUMBER_OF_COLUMNS,
-		BULLET_SPRITE_SIZE,
-		BULLET_SPRITE_SIZE,
+		BULLET_SPRITE_WIDTH,
+		BULLET_SPRITE_HEIGHT,
 		D3DCOLOR_XRGB(255, 255, 255)
 	);
 

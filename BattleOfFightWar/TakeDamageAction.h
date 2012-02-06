@@ -4,8 +4,11 @@
 #ifndef _ACTION_TAKE_DAMAGE_
 #define _ACTION_TAKE_DAMAGE_
 
+#include "Sprite.h"
+
 extern TexturePack GlobalTexturePack;
 extern DirectXStuff GlobalDirectXStuff;
+
 
 class TakeDamageAction : public Action
 {

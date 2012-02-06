@@ -24,14 +24,14 @@ void RangedWeapon::attack(WorldObject* Attacker)
 			break;
 		case ENTITY_FACING_NORTH:
 			BulletPosition.y = attackerPositionY - 26;
-			BulletPosition.x = attackerPositionX + 31;
+			BulletPosition.x = attackerPositionX + 22;
 			break;
 		case ENTITY_FACING_EAST:
 			BulletPosition.y = attackerPositionY + 5;
 			BulletPosition.x = attackerPositionX + TROOPER_BODY_SPRITE_SIZE;
 			break;
 		case ENTITY_FACING_WEST:
-			BulletPosition.y = attackerPositionY - 5;
+			BulletPosition.y = attackerPositionY + 5;
 			BulletPosition.x = attackerPositionX - TROOPER_BODY_SPRITE_SIZE_HALF;
 			break;
 		default:

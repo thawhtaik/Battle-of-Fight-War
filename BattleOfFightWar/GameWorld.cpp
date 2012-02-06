@@ -11,6 +11,7 @@ bool GameWorld::initGameWorld()
 
 	GlobalLivingEntitiesList.releaseLivingEntitiesList();
 	GlobalProjectileList.releaseProjectileList();
+	GlobalAnimatedEffectsList.releaseAnimatedEffectsList();
 
 	//STRESS TEST OOOOH SHIIIIT PARALYZEDDDD!
 	for (int i = 0; i < NUM_ASSHOLES; i++) {
@@ -55,6 +56,7 @@ void GameWorld::releaseGameWorld()
 
 	GlobalLivingEntitiesList.releaseLivingEntitiesList();
 	GlobalProjectileList.releaseProjectileList();
+	GlobalAnimatedEffectsList.releaseAnimatedEffectsList();
 
 	WorldMap.releaseMap();
 }
@@ -86,6 +88,8 @@ void GameWorld::updateGameWorld()
 	GlobalProjectileList.update();
 	GlobalProjectileList.update();
 
+	GlobalAnimatedEffectsList.update();
+
 	this->_clearAllLivingEntityTilePositions();
 }
 
@@ -100,6 +104,8 @@ void GameWorld::renderGameWorld()
 	}
 
 	GlobalProjectileList.render();
+
+	GlobalAnimatedEffectsList.render();
 }
 
 

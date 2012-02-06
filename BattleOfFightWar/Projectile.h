@@ -14,6 +14,7 @@
 #include "LivingEntitiesList.h"
 #include "Map.h"
 
+#include "AnimatedEffectCreator.h"
 
 extern TexturePack GlobalTexturePack;
 extern DirectXStuff GlobalDirectXStuff;

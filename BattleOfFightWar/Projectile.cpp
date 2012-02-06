@@ -136,6 +136,12 @@ bool Projectile::_hasCollisionOnTile(MapTile* MapTile)
 		//Really it should be seeing if topLeft x, topLeft y, bottomRight x, or bottomRight y are outside the LivingEntity rectangle, but since
 		//our bullet is very small we'll just treat it as a point
 		if (LivingEntity->isPositionInObjectHitbox(this->Position)) {
+			
+			MapCoordinates BloodPosition = MapCoordinates::MapCoordinates(this->Position.x - SPRITE_SIZE_MEDIUM/2, this->Position.y - SPRITE_SIZE_MEDIUM/2);
+			AnimatedEffectCreator::createBleedingEffect(BloodPosition);
+
+			//AnimatedEffectCreator::createBleedingEffect(this->Position);
+
 			LivingEntity->damage();
 			this->_functional = false;
 

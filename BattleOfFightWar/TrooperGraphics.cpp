@@ -46,7 +46,6 @@ void TrooperGraphics::releaseLivingEntityGraphics()
 
 	this->_HeadTexture = NULL;
 	this->_BodyTexture = NULL;
-	this->_BloodTexture = NULL;
 
 	this->_WeaponGraphics->releaseWeaponGraphics();
 	this->_WeaponGraphics = NULL;
@@ -74,9 +73,6 @@ void TrooperGraphics::render()
 			break;
 	}
 
-	if (this->_renderBlood) {
-		this->_Blood.spriteTransformDraw(*this->_BloodTexture, this->_SpriteObj);
-	}
 }
 
 void TrooperGraphics::setCurrentSpriteFacing(int newFacing)
@@ -108,11 +104,11 @@ void TrooperGraphics::setCurrentSpriteFacing(int newFacing)
 
 void TrooperGraphics::animate()
 {
-	if (this->_renderBlood) {
+	/*if (this->_renderBlood) {
 		this->_Blood.x = this->positionX;
 		this->_Blood.y = this->positionY;
 		this->_Blood.animate();
-	}
+	}*/
 	
 	/*int bodyOffset = 0;
 	if (this->Body.scalingX == -1) {

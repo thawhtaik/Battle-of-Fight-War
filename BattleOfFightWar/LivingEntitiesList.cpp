@@ -11,6 +11,7 @@ void LivingEntitiesList::releaseLivingEntitiesList()
 {
 	for (int i = 0; i < this->_LivingEntities.size(); i++) {
 		this->_LivingEntities.at(i)->releaseWorldObject();
+		delete this->_LivingEntities.at(i);
 		this->_LivingEntities.erase(this->_LivingEntities.begin() + i);
 	}
 

@@ -26,9 +26,6 @@ class LivingEntityGraphics
 		
 		void setAnimationEffect(int newAnimationEffect);
 
-		void renderBloodOn();
-		void renderBloodOff();
-
 		int positionX;
 		int positionY;
 
@@ -38,10 +35,6 @@ class LivingEntityGraphics
 
 		//FOR DOING ALL SPRITE-RELATED STUFF
 		LPD3DXSPRITE _SpriteObj;
-
-		LPDIRECT3DTEXTURE9* _BloodTexture;
-		Sprite _Blood;
-		bool _renderBlood;
 };
 
 #endif

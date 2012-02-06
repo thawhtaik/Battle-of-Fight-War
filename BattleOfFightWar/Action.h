@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "ActionUser.h"
+#include "AnimatedEffectCreator.h"
 
 class Action
 {

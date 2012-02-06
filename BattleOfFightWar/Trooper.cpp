@@ -5,7 +5,7 @@ Trooper::Trooper()
 	this->sizeX = this->sizeY = TROOPER_BODY_SPRITE_SIZE_HALF;
 	
 	this->hitboxSizeX = TROOPER_BODY_SPRITE_SIZE_HALF;
-	this->hitboxSizeY = TROOPER_BODY_SPRITE_SIZE;
+	this->hitboxSizeY = 36;
 
 	this->initLivingEntityGraphics();
 

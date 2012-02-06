@@ -3,7 +3,6 @@
 TakeDamageAction::TakeDamageAction(ActionUser* ActionUser)
 {
 	this->_ActionUser = ActionUser;
-	this->_ActionUser->setAnimationEffect(ANIMATION_EFFECT_BLEEDING);
 
 	this->_actionWindUpTime = 80;
 	this->_damageFinished = false;
@@ -24,10 +23,5 @@ bool TakeDamageAction::isActionFinished()
 
 void TakeDamageAction::doAction()
 {
-	this->_timeTick++;
-
-	if (this->_timeTick - this->_actionStartTime >= this->_actionWindUpTime) {
-		this->_damageFinished = true;
-		this->_ActionUser->setAnimationEffect(ANIMATION_EFFECT_STOP_BLEEDING);
-	}
+	this->_damageFinished = true;
 }

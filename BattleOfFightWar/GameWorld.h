@@ -8,6 +8,7 @@
 
 #include "LivingEntitiesList.h"
 #include "ProjectileList.h"
+#include "AnimatedEffectsList.h"
 
 const int NUM_ASSHOLES = 10;
 
@@ -15,6 +16,7 @@ extern Map WorldMap;
 
 extern LivingEntitiesList GlobalLivingEntitiesList;
 extern ProjectileList GlobalProjectileList;
+extern AnimatedEffectsList GlobalAnimatedEffectsList;
 
 class GameWorld
 {
