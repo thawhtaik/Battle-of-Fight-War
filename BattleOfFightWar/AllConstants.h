@@ -2,6 +2,13 @@
 #define _TROOPER_CONSTANTS_
 
 //
+// General Stuff; ex: math
+//
+#define PI 3.14159265
+
+
+
+//
 // Living Entities
 //
 #define ENTITY_ANIMATION_IDLE  0
@@ -14,10 +21,21 @@
 #define ENTITY_FACING_NORTH -1
 #define ENTITY_FACING_EAST 2
 #define ENTITY_FACING_WEST -2
+#define ENTITY_FACING_SOUTHEAST 3
+#define ENTITY_FACING_SOUTHWEST -3
+#define ENTITY_FACING_NORTHEAST 4
+#define ENTITY_FACING_NORTHWEST -4
+
 
 
 //
-// Trooper
+// General Sprites
+//
+
+#define SPRITE_SIZE_SMALL 24
+
+//
+// Trooper Sprites
 //
 
 #define TROOPER_SPRITE_SIZE_SMALL 24
@@ -39,7 +57,7 @@
 #define ANIMATION_EFFECT_STOP_MUZZLE_FLASH -2
 
 //
-// Projectiles
+// Projectile Sprites
 //
 
 #define BULLET_SPRITESHEET_NUMBER_OF_COLUMNS 1
@@ -47,3 +65,9 @@
 #define BULLET_SPRITE_WIDTH 48
 
 #endif
+
+//
+// UI
+//
+
+#define CURSOR_MINIMUM_DISTANCE_TO_PLAYER 15

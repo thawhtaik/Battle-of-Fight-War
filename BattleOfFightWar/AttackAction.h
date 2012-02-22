@@ -8,7 +8,7 @@ class AttackAction : public Action
 {
 
 	public:
-		AttackAction(ActionUser* ActionUser);
+		AttackAction(ActionUser* ActionUser, MapCoordinates TargetPosition);
 		void releaseAction();
 
 		void doAction();
@@ -16,6 +16,7 @@ class AttackAction : public Action
 
 	private:
 
+		MapCoordinates _TargetPosition;
 		bool _attackFinished;
 };
 

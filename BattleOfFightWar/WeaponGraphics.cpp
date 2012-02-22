@@ -90,34 +90,63 @@ void WeaponGraphics::setCurrentSpriteFacing(int newFacing)
 
 	this->_currentFacing = newFacing;
 
+	//Ugggh trial and error
 	switch (this->_currentFacing) {
 		case ENTITY_FACING_SOUTH:
 			this->_currentSpriteRow = WEAPON_SPRITE_ROW_SOUTH;
 			this->_WeaponSprite.frame = this->_WeaponSprite.endFrame = this->_WeaponSprite.startFrame = this->_currentSpriteRow;
 			this->_WeaponSprite.scalingX = +1;
+			this->_offsetX = -13;
+			this->_offsetY = -3;
+			break;
+		case ENTITY_FACING_SOUTHEAST:
+			this->_currentSpriteRow = WEAPON_SPRITE_ROW_SOUTHEAST;
+			this->_WeaponSprite.frame = this->_WeaponSprite.endFrame = this->_WeaponSprite.startFrame = this->_currentSpriteRow;
+			this->_WeaponSprite.scalingX = +1;
 			this->_offsetX = +7;
-			this->_offsetY = TROOPER_BODY_SPRITE_SIZE_HALF/3;
+			this->_offsetY = -7;
+			break;
+		case ENTITY_FACING_SOUTHWEST:
+			this->_currentSpriteRow = WEAPON_SPRITE_ROW_SOUTHEAST;
+			this->_WeaponSprite.frame = this->_WeaponSprite.endFrame = this->_WeaponSprite.startFrame = this->_currentSpriteRow;
+			this->_WeaponSprite.scalingX = -1;
+			this->_offsetX = +TROOPER_BODY_SPRITE_SIZE_HALF + 14;
+			this->_offsetY = -7;
 			break;
 		case ENTITY_FACING_NORTH:
 			this->_currentSpriteRow = WEAPON_SPRITE_ROW_NORTH;
 			this->_WeaponSprite.frame = this->_WeaponSprite.endFrame = this->_WeaponSprite.startFrame = this->_currentSpriteRow;
 			this->_WeaponSprite.scalingX = +1;
-			this->_offsetX = +TROOPER_BODY_SPRITE_SIZE_HALF * 1.4;
-			this->_offsetY = -(TROOPER_BODY_SPRITE_SIZE_HALF/2);
+			this->_offsetX = +13;
+			this->_offsetY = -(TROOPER_BODY_SPRITE_SIZE_HALF);
+			break;
+		case ENTITY_FACING_NORTHEAST:
+			this->_currentSpriteRow = WEAPON_SPRITE_ROW_NORTHEAST;
+			this->_WeaponSprite.frame = this->_WeaponSprite.endFrame = this->_WeaponSprite.startFrame = this->_currentSpriteRow;
+			this->_WeaponSprite.scalingX = +1;
+			this->_offsetX = +TROOPER_BODY_SPRITE_SIZE_HALF - 6;
+			this->_offsetY = -15;
+			break;
+		case ENTITY_FACING_NORTHWEST:
+			this->_currentSpriteRow = WEAPON_SPRITE_ROW_NORTHEAST;
+			this->_WeaponSprite.frame = this->_WeaponSprite.endFrame = this->_WeaponSprite.startFrame = this->_currentSpriteRow;
+			this->_WeaponSprite.scalingX = -1;
+			this->_offsetX = +TROOPER_BODY_SPRITE_SIZE_HALF + 6;
+			this->_offsetY = -15;
 			break;
 		case ENTITY_FACING_EAST:
 			this->_currentSpriteRow = WEAPON_SPRITE_ROW_SIDE;
 			this->_WeaponSprite.frame = this->_WeaponSprite.endFrame = this->_WeaponSprite.startFrame = this->_currentSpriteRow;
 			this->_WeaponSprite.scalingX = +1;
-			this->_offsetX = +7;
-			this->_offsetY = TROOPER_BODY_SPRITE_SIZE_HALF/3;
+			this->_offsetX = +5;
+			this->_offsetY = -12;
 			break;
 		case ENTITY_FACING_WEST:
 			this->_currentSpriteRow = WEAPON_SPRITE_ROW_SIDE;
 			this->_WeaponSprite.frame = this->_WeaponSprite.endFrame = this->_WeaponSprite.startFrame = this->_currentSpriteRow;
 			this->_WeaponSprite.scalingX = -1;
-			this->_offsetX = +TROOPER_BODY_SPRITE_SIZE_HALF + 14;
-			this->_offsetY = TROOPER_BODY_SPRITE_SIZE_HALF/3;
+			this->_offsetX = +40;
+			this->_offsetY = -12;
 			break;
 		default:
 			break;
@@ -193,6 +222,22 @@ void WeaponGraphics::_determineMuzzleFlashPosition()
 		case ENTITY_FACING_WEST:
 			this->_MuzzleFlashSprite.x = (float)this->MapPosition.x - TROOPER_BODY_SPRITE_SIZE_HALF;
 			this->_MuzzleFlashSprite.y = (float)this->MapPosition.y + 5;
+			break;
+		case ENTITY_FACING_SOUTHEAST:
+			this->_MuzzleFlashSprite.x = (float)this->MapPosition.x + TROOPER_BODY_SPRITE_SIZE;
+			this->_MuzzleFlashSprite.y = (float)this->MapPosition.y + 36;
+			break;
+		case ENTITY_FACING_SOUTHWEST:
+			this->_MuzzleFlashSprite.x = (float)this->MapPosition.x - TROOPER_BODY_SPRITE_SIZE_HALF;
+			this->_MuzzleFlashSprite.y = (float)this->MapPosition.y + 36;
+			break;
+		case ENTITY_FACING_NORTHEAST:
+			this->_MuzzleFlashSprite.x = (float)this->MapPosition.x + TROOPER_BODY_SPRITE_SIZE + 7;
+			this->_MuzzleFlashSprite.y = (float)this->MapPosition.y - TROOPER_BODY_SPRITE_SIZE_HALF + 7;
+			break;
+		case ENTITY_FACING_NORTHWEST:
+			this->_MuzzleFlashSprite.x = (float)this->MapPosition.x - TROOPER_BODY_SPRITE_SIZE_HALF - 7;
+			this->_MuzzleFlashSprite.y = (float)this->MapPosition.y - TROOPER_BODY_SPRITE_SIZE_HALF + 7;
 			break;
 	}
 }

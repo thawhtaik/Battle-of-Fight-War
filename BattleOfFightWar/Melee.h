@@ -11,7 +11,7 @@ class Melee: public Weapon
 	public:
 
 		Melee(int newAttackPower, int newRange, int newCoolDown, int newWindUpTime);
-		void attack(WorldObject* Attacker);
+		void attack(WorldObject* Attacker, MapCoordinates TargetPosition);
 };
 
 

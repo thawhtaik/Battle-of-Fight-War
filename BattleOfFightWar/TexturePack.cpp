@@ -6,7 +6,6 @@ TexturePack::TexturePack()
 {
 	this->HeadTexture = NULL;
 	this->BodyTexture = NULL;
-	this->LegsTexture = NULL;
 }
 
 bool TexturePack::initTexturePack()
@@ -22,12 +21,6 @@ bool TexturePack::initTexturePack()
 	this->BodyTexture = GlobalDirectXStuff.loadTexture("Sprites/body.bmp", D3DCOLOR_XRGB(255, 255 , 255));
 	if (!this->BodyTexture) {
 		Debugger.print("Error loading body spritesheet!");
-		return false;
-	}
-
-	this->LegsTexture = GlobalDirectXStuff.loadTexture("Sprites/legs.bmp", D3DCOLOR_XRGB(255, 255, 255));
-	if (!this->LegsTexture) {
-		Debugger.print("Error loading legs spritesheet!");
 		return false;
 	}
 
@@ -61,6 +54,13 @@ bool TexturePack::initTexturePack()
 		return false;
 	}
 
+
+	this->TargetCursorTexture = GlobalDirectXStuff.loadTexture("Sprites/targetCursor.bmp",  D3DCOLOR_XRGB(255, 255, 255));
+	if (!this->TargetCursorTexture) {
+		Debugger.print("Error loading target cursor spritesheet!");
+		return false;
+	}
+
 	Debugger.print("Textures loaded");
 	return true;
 }
@@ -73,9 +73,6 @@ void TexturePack::releaseTexturePack()
 	if (this->BodyTexture != NULL) {
 		this->BodyTexture->Release();
 	}
-	if (this->LegsTexture != NULL) {
-		this->LegsTexture->Release();
-	}
 	if (this->RifleTexture != NULL) {
 		this->RifleTexture->Release();
 	}
@@ -87,6 +84,9 @@ void TexturePack::releaseTexturePack()
 	}
 	if (this->MapTilesSurface != NULL) {
 		this->MapTilesSurface->Release();
+	}
+	if (this->TargetCursorTexture != NULL) {
+		this->TargetCursorTexture->Release();
 	}
 
 }

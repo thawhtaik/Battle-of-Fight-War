@@ -1,8 +1,9 @@
 #include "AttackAction.h"
 
-AttackAction::AttackAction(ActionUser* ActionUser)
+AttackAction::AttackAction(ActionUser* ActionUser, MapCoordinates TargetPosition)
 {
 	this->_ActionUser = ActionUser;
+	this->_TargetPosition = TargetPosition;
 
 	this->_actionWindUpTime = this->_ActionUser->getCurrentWeapon()->getAttackWindUpTime();
 	this->_attackFinished = false;
@@ -28,9 +29,7 @@ void AttackAction::doAction()
 	if (this->_timeTick - this->_actionStartTime >= this->_actionWindUpTime) {
 
 		Weapon* UserWeapon = this->_ActionUser->getCurrentWeapon();
-		UserWeapon->attack(this->_ActionUser);
+		UserWeapon->attack(this->_ActionUser, this->_TargetPosition);
 		this->_attackFinished = true;
-
-		this->_ActionUser->setAnimationEffect(ANIMATION_EFFECT_MUZZLE_FLASH);
 	}
 }

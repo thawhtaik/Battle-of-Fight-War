@@ -8,7 +8,7 @@ RangedWeapon::RangedWeapon(int newAttackPower, int newRange, int newCoolDown)
 	this->_attackWindUpTime = WEAPON_RANGED_WIND_UP_TIME_NORMAL;
 }
 
-void RangedWeapon::attack(WorldObject* Attacker)
+void RangedWeapon::attack(WorldObject* Attacker, MapCoordinates TargetPosition)
 {
 	int attackerPositionX = Attacker->getPositionX();
 	int attackerPositionY = Attacker->getPositionY();
@@ -34,14 +34,32 @@ void RangedWeapon::attack(WorldObject* Attacker)
 			BulletPosition.y = attackerPositionY + 5;
 			BulletPosition.x = attackerPositionX - TROOPER_BODY_SPRITE_SIZE_HALF;
 			break;
+		case ENTITY_FACING_SOUTHEAST:
+			BulletPosition.y = attackerPositionY + 20;
+			BulletPosition.x = attackerPositionX + 25;
+			break;
+		case ENTITY_FACING_SOUTHWEST:
+			BulletPosition.y = attackerPositionY + 20;
+			BulletPosition.x = attackerPositionX - 25;
+			break;
+		case ENTITY_FACING_NORTHEAST:
+			BulletPosition.y = attackerPositionY;
+			BulletPosition.x = attackerPositionX + 25;
+			break;
+		case ENTITY_FACING_NORTHWEST:
+			BulletPosition.y = attackerPositionY;
+			BulletPosition.x = attackerPositionX - 25;
+			break;
 		default:
 			BulletPosition.y = attackerPositionY;
 			BulletPosition.x = attackerPositionX;
 			break;
 	}
 
-	//Based on weapon type, determine type of bullet to fired hyah
-	Bullet* NewBullet = new Bullet(BulletPosition, facing, this->_attackPower, 15);
+	Attacker->setAnimationEffect(ANIMATION_EFFECT_MUZZLE_FLASH);
+
+	//Based on weapon type, determine type of bullet to fired heyah
+	Bullet* NewBullet = new Bullet(BulletPosition, TargetPosition, this->_attackPower, 15);
 	GlobalProjectileList.add(NewBullet);
 
 	//Add fired projectile to list of projectiles

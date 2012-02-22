@@ -57,11 +57,15 @@ void TrooperGraphics::render()
 	switch (this->_currentFacing) {
 
 		case ENTITY_FACING_SOUTH:
+		case ENTITY_FACING_SOUTHEAST:
+		case ENTITY_FACING_SOUTHWEST:
 			this->Body.spriteTransformDraw(*this->_BodyTexture, this->_SpriteObj);
 			this->Head.spriteTransformDraw(*this->_HeadTexture, this->_SpriteObj);
 			this->_WeaponGraphics->render();
 			break;
 		case ENTITY_FACING_NORTH:
+		case ENTITY_FACING_NORTHEAST:
+		case ENTITY_FACING_NORTHWEST:
 			this->_WeaponGraphics->render();
 			this->Head.spriteTransformDraw(*this->_HeadTexture, this->_SpriteObj);
 			this->Body.spriteTransformDraw(*this->_BodyTexture, this->_SpriteObj);
@@ -98,6 +102,22 @@ void TrooperGraphics::setCurrentSpriteFacing(int newFacing)
 			break;
 		case ENTITY_FACING_WEST:
 			this->_setWestFacingSpriteValues();
+			break;
+		case ENTITY_FACING_SOUTHEAST:
+			this->_setMirrorValuesForXAxis(1);
+			this->_setSpriteValuesForFacing(TROOPER_SPRITE_ROW_SOUTHEAST);
+			break;
+		case ENTITY_FACING_SOUTHWEST:
+			this->_setMirrorValuesForXAxis(-1);
+			this->_setSpriteValuesForFacing(TROOPER_SPRITE_ROW_SOUTHEAST);
+			break;
+		case ENTITY_FACING_NORTHEAST:
+			this->_setMirrorValuesForXAxis(1);
+			this->_setSpriteValuesForFacing(TROOPER_SPRITE_ROW_NORTHEAST);
+			break;
+		case ENTITY_FACING_NORTHWEST:
+			this->_setMirrorValuesForXAxis(-1);
+			this->_setSpriteValuesForFacing(TROOPER_SPRITE_ROW_NORTHEAST);
 			break;
 	}
 }
@@ -239,8 +259,16 @@ void TrooperGraphics::_setSpriteValuesForFacing(int row)
 			this->_HEAD_OFFSET_Y = 15;
 			break;
 		case TROOPER_SPRITE_ROW_SIDE:
-			this->_HEAD_OFFSET_X = 9;
-			this->_HEAD_OFFSET_Y = 13;
+			this->_HEAD_OFFSET_X = 7;
+			this->_HEAD_OFFSET_Y = 15;
+			break;
+		case TROOPER_SPRITE_ROW_SOUTHEAST:
+			this->_HEAD_OFFSET_X = 7;
+			this->_HEAD_OFFSET_Y = 15;
+			break;
+		case TROOPER_SPRITE_ROW_NORTHEAST:
+			this->_HEAD_OFFSET_X = 8;
+			this->_HEAD_OFFSET_Y = 15;
 			break;
 	}
 

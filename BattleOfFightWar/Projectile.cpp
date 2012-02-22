@@ -7,16 +7,16 @@ Projectile::Projectile()
 
 	this->_ProjectileTexture = NULL;
 
-	this->_xVelocity = 0;
-	this->_yVelocity = 0;
+	this->_velocityX = 0;
+	this->_velocityY = 0;
 
 	this->_functional = true;
 }
 
 void Projectile::update()
 {
-	this->Position.x += this->_xVelocity;
-	this->Position.y += this->_yVelocity;
+	this->Position.x += this->_velocityX;
+	this->Position.y += this->_velocityY;
 
 	this->_ProjectileSprite.x = this->Position.x;
 	this->_ProjectileSprite.y = this->Position.y;
@@ -97,24 +97,30 @@ void Projectile::releaseProjectile()
 
 void Projectile::_determineMovement(short newVelocity)
 {
-	switch (this->_facing) {
-		case ENTITY_FACING_SOUTH:
-			this->_yVelocity = +newVelocity;
-			this->_ProjectileSprite.rotation = -(M_PI * 1.5); //Reversed... why?
-			break;
-		case ENTITY_FACING_NORTH:
-			this->_yVelocity = -newVelocity;
-			this->_ProjectileSprite.rotation = -(M_PI * 0.5); //Reversed... why?
-			break;
-		case ENTITY_FACING_EAST:
-			this->_xVelocity = +newVelocity;
-			this->_ProjectileSprite.rotation = 0;
-			break;
-		case ENTITY_FACING_WEST:
-			this->_xVelocity = -newVelocity;
-			this->_ProjectileSprite.rotation = M_PI;
-			break;
+	int distanceX = this->_TargetPosition.x - this->Position.x;
+	int distanceY = this->_TargetPosition.y - this->Position.y;
+
+	float angle = 0.0;
+	if (distanceX == 0) {
+		if (distanceY >= 0) {
+			angle = PI/2;
+		} else {
+			angle = -PI/2;
+		}
+	} else {
+		angle = atan(((float)distanceY/(float)distanceX));
+	
+		if (distanceX <= 0 && distanceY <= 0) {
+			angle += PI;
+		} else if (distanceX <= 0) {
+			angle -= PI;
+		}
 	}
+
+	this->_velocityY = newVelocity * sin(angle);
+	this->_velocityX = newVelocity * cos(angle);
+
+	this->_ProjectileSprite.rotation = angle;
 
 	this->_ProjectileSprite.x = this->Position.x;
 	this->_ProjectileSprite.y = this->Position.y;
@@ -137,10 +143,21 @@ bool Projectile::_hasCollisionOnTile(MapTile* MapTile)
 		//our bullet is very small we'll just treat it as a point
 		if (LivingEntity->isPositionInObjectHitbox(this->Position)) {
 			
-			MapCoordinates BloodPosition = MapCoordinates::MapCoordinates(this->Position.x - SPRITE_SIZE_MEDIUM/2, this->Position.y - SPRITE_SIZE_MEDIUM/2);
-			AnimatedEffectCreator::createBleedingEffect(BloodPosition);
+			MapCoordinates BloodPosition = MapCoordinates();
+			switch (this->_facing) {
 
-			//AnimatedEffectCreator::createBleedingEffect(this->Position);
+				case ENTITY_FACING_EAST:
+				case ENTITY_FACING_WEST:
+					BloodPosition.x = this->Position.x - SPRITE_SIZE_MEDIUM/2;
+					BloodPosition.y = this->Position.y  - SPRITE_SIZE_MEDIUM/2;
+					break;
+				default:
+					BloodPosition.x = this->Position.x;
+					BloodPosition.y = this->Position.y;
+					break;
+			}
+
+			AnimatedEffectCreator::createBleedingEffect(BloodPosition);
 
 			LivingEntity->damage();
 			this->_functional = false;

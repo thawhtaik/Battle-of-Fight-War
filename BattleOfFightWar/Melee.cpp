@@ -8,7 +8,7 @@ Melee::Melee(int newAttackPower, int newRange, int newCoolDown, int newWindUpTim
 	this->_attackWindUpTime = newWindUpTime;
 }
 
-void Melee::attack(WorldObject* Attacker)
+void Melee::attack(WorldObject* Attacker, MapCoordinates TargetPosition)
 {
 	int attackerPositionX = Attacker->getPositionX();
 	int attackerPositionY = Attacker->getPositionY();

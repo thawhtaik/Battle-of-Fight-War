@@ -9,6 +9,8 @@ bool GameWorld::initGameWorld()
 	WorldMap = Map::Map(16, 12);
 	WorldMap.initMapTilePathfindingStats();
 
+	GlobalCursor.initCursor(MapCoordinates(0,0));
+
 	GlobalLivingEntitiesList.releaseLivingEntitiesList();
 	GlobalProjectileList.releaseProjectileList();
 	GlobalAnimatedEffectsList.releaseAnimatedEffectsList();
@@ -59,6 +61,8 @@ void GameWorld::releaseGameWorld()
 	GlobalAnimatedEffectsList.releaseAnimatedEffectsList();
 
 	WorldMap.releaseMap();
+
+	GlobalCursor.releaseCursor();
 }
 
 void GameWorld::updateGameWorld()
@@ -106,6 +110,8 @@ void GameWorld::renderGameWorld()
 	GlobalProjectileList.render();
 
 	GlobalAnimatedEffectsList.render();
+
+	GlobalCursor.render();
 }
 
 

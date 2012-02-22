@@ -50,6 +50,8 @@ void Controller::movePlayer(int direction)
 {
 	Player* ThePlayer = this->_Game->_GameWorld.getPlayer();
 	ThePlayer->setCurrentMovementDirection(direction);
+
+	ThePlayer->lookAtPosition(GlobalCursor.Position);
 }
 
 void Controller::setPath(long mouseX, long mouseY)
@@ -73,4 +75,19 @@ void Controller::playerAttack()
 {
 	Player* ThePlayer = this->_Game->_GameWorld.getPlayer();
 	ThePlayer->attack();
+}
+
+
+void Controller::updateCursorPosition(short addX, short addY)
+{
+	GlobalCursor.move(addX, addY);
+
+	Player* ThePlayer = this->_Game->_GameWorld.getPlayer();
+	ThePlayer->lookAtPosition(GlobalCursor.Position);
+
+	/*float distanceToPlayerSquared = pow((GlobalCursor.Position.x - ThePlayer->positionX), 2.0) + pow((GlobalCursor.Position.y - ThePlayer->positionY), 2.0);
+
+	if (distanceToPlayerSquared <= CURSOR_MINIMUM_DISTANCE_TO_PLAYER) {
+		return;
+	}*/
 }

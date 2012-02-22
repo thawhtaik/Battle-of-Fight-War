@@ -13,6 +13,8 @@ extern LivingEntitiesList GlobalLivingEntitiesList;
 #define WEAPON_TYPE_UNARMED 0
 #define WEAPON_TYPE_RIFLE 1
 
+#include "MapCoordinates.h"
+
 class Weapon
 {
 
@@ -20,7 +22,7 @@ class Weapon
 
 		Weapon();
 
-		virtual void attack(WorldObject* Attacker) = 0;
+		virtual void attack(WorldObject* Attacker, MapCoordinates TargetPosition) = 0;
 		int getAttackWindUpTime();
 
 	protected:

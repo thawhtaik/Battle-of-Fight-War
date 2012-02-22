@@ -17,7 +17,6 @@ class TexturePack
 		//Living Entities
 		LPDIRECT3DTEXTURE9 HeadTexture;
 		LPDIRECT3DTEXTURE9 BodyTexture;
-		LPDIRECT3DTEXTURE9 LegsTexture;
 		LPDIRECT3DTEXTURE9 BloodTexture;
 
 		//Weapons
@@ -27,7 +26,11 @@ class TexturePack
 		//Projectiles
 		LPDIRECT3DTEXTURE9 BulletTexture;
 
+		//Terrain 
 		LPDIRECT3DSURFACE9 MapTilesSurface;
+
+		//UI
+		LPDIRECT3DTEXTURE9 TargetCursorTexture;
 };
 
 #endif

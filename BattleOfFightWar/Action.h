@@ -3,6 +3,7 @@
 
 #include <cmath>
 
+#include "MapCoordinates.h"
 #include "ActionUser.h"
 #include "AnimatedEffectCreator.h"
 

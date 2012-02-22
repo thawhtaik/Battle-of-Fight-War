@@ -16,6 +16,8 @@
 
 #include "AnimatedEffectCreator.h"
 
+#include <math.h>
+
 extern TexturePack GlobalTexturePack;
 extern DirectXStuff GlobalDirectXStuff;
 
@@ -38,6 +40,8 @@ class Projectile
 
 	protected:
 
+		MapCoordinates _TargetPosition;
+
 		void _determineMovement(short newVelocity);
 		
 		bool _hasCollisionOnTile(MapTile* MapTile);
@@ -50,8 +54,8 @@ class Projectile
 		long _distanceTravelled;
 		short _attackPower;
 		
-		short _xVelocity;
-		short _yVelocity;
+		short _velocityX;
+		short _velocityY;
 
 		short _facing;
 		

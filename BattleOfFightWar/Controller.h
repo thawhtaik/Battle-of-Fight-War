@@ -4,10 +4,14 @@
 #define _CONTROLLER_
 
 #include "Game.h"
+#include "Cursor.h"
+
+#include <math.h>
 
 /** So the controller manipulates the game */
 
 extern Map WorldMap;
+extern Cursor GlobalCursor;
 
 class Controller 
 {
@@ -23,6 +27,8 @@ class Controller
 
 		void updateCursorCoordinates(long x, long y);
 		void updateMapTileCoordinates(long x, long y);
+
+		void updateCursorPosition(short addX, short addY);
 
 		void movePlayer(int direction);
 		void setPath(long mouseX, long mouseY);

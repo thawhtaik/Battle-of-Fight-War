@@ -17,9 +17,6 @@ class ActionUser: public WorldObject
 		virtual int getPositionX() = 0;
 		virtual int getPositionY() = 0;
 		virtual int getFacing() = 0;
-
-		virtual void setCurrentAnimation(int newAnimation) = 0;
-		virtual void setAnimationEffect(int newAnimation) = 0;
 };
 
 #endif

@@ -119,26 +119,34 @@ void LivingEntity::_moveBasedOnCurrentMovementDirection()
 	switch (this->_currentMovementDirection) {
 		case ENTITY_MOVEMENT_NORTH:
 			this->moveEntity(0, -1);
+			this->_setCurrentFacing(ENTITY_FACING_NORTH);
 			break;
 		case ENTITY_MOVEMENT_SOUTH:
 			this->moveEntity(0, +1);
+			this->_setCurrentFacing(ENTITY_FACING_SOUTH);
 			break;
 		case ENTITY_MOVEMENT_EAST:
+			this->_setCurrentFacing(ENTITY_FACING_EAST);
 			this->moveEntity(+1, 0);
 			break;
 		case ENTITY_MOVEMENT_WEST:
+			this->_setCurrentFacing(ENTITY_FACING_WEST);
 			this->moveEntity(-1, 0);
 			break;
 		case ENTITY_MOVEMENT_SOUTHEAST:
+			this->_setCurrentFacing(ENTITY_FACING_SOUTHEAST);
 			this->moveEntity(+1, +1);
 			break;
 		case ENTITY_MOVEMENT_SOUTHWEST:
+			this->_setCurrentFacing(ENTITY_FACING_SOUTHWEST);
 			this->moveEntity(-1, +1);
 			break;
 		case ENTITY_MOVEMENT_NORTHEAST:
+			this->_setCurrentFacing(ENTITY_FACING_NORTHEAST);
 			this->moveEntity(+1, -1);
 			break;
 		case ENTITY_MOVEMENT_NORTHWEST:
+			this->_setCurrentFacing(ENTITY_FACING_NORTHWEST);
 			this->moveEntity(-1, -1);
 			break;
 
@@ -153,20 +161,6 @@ void LivingEntity::moveEntity(int addX, int addY)
 {
 	int xDisplacement = abs(addX);
 	int yDisplacement = abs(addY);
-
-	if (xDisplacement >= yDisplacement) {
-		if (addX > 0) {
-			this->_setCurrentFacing(ENTITY_FACING_EAST);
-		} else {
-			this->_setCurrentFacing(ENTITY_FACING_WEST);
-		}
-	} else {
-		if (addY > 0) {
-			this->_setCurrentFacing(ENTITY_FACING_SOUTH);
-		} else {
-			this->_setCurrentFacing(ENTITY_FACING_NORTH);
-		}
-	}
 
 	this->_EntityGraphics->setCurrentAnimationState(ENTITY_ANIMATION_RUNNING);
 
@@ -194,21 +188,7 @@ void LivingEntity::_setCurrentFacing(int newFacing)
 
 	this->_currentFacing = newFacing;
 
-	switch (newFacing) {
-
-		case ENTITY_FACING_NORTH:
-			this->_EntityGraphics->setCurrentSpriteFacing(ENTITY_FACING_NORTH);
-			break;
-		case ENTITY_FACING_SOUTH:
-			this->_EntityGraphics->setCurrentSpriteFacing(ENTITY_FACING_SOUTH);
-			break;
-		case ENTITY_FACING_EAST:
-			this->_EntityGraphics->setCurrentSpriteFacing(ENTITY_FACING_EAST);
-			break;
-		case ENTITY_FACING_WEST:
-			this->_EntityGraphics->setCurrentSpriteFacing(ENTITY_FACING_WEST);
-			break;
-	}
+	this->_EntityGraphics->setCurrentSpriteFacing(this->_currentFacing);
 }
 
 
@@ -289,8 +269,9 @@ void LivingEntity::setAnimationEffect(int newAnimationEffect)
 
 void LivingEntity::attack()
 {
+	MapCoordinates BsMapCoordinates = MapCoordinates(0, 0);
 	//Start attack action
-	Action* Attack = new AttackAction(this);
+	Action* Attack = new AttackAction(this, BsMapCoordinates);
 	this->_CurrentActions.push_back(Attack);
 }
 

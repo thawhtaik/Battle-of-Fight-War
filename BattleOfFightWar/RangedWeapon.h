@@ -17,7 +17,7 @@ class RangedWeapon: public Weapon
 
 	public:
 		RangedWeapon(int newAttackPower, int newRange, int newCoolDown);
-		void attack(WorldObject* Attacker);
+		void attack(WorldObject* Attacker, MapCoordinates TargetPosition);
 };
 
 

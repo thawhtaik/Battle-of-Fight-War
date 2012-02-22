@@ -126,7 +126,7 @@ LRESULT RawInputz::myWinProc(HWND window, UINT msg, WPARAM wParam, LPARAM lParam
 		    }
 			
 			if (this->_mouseDown == true) { //Mouse counts as being held down until we get an up-flag... which will be almost always
-				this->_Controller->setPath(this->_currentMouseX, this->_currentMouseY);
+				/*this->_Controller->setPath(this->_currentMouseX, this->_currentMouseY);*/
 				/*MessageBox(
 					window, 
 					TEXT("Mouse click received!"), TEXT("BREAKPOINT"), MB_OK
@@ -144,7 +144,8 @@ LRESULT RawInputz::myWinProc(HWND window, UINT msg, WPARAM wParam, LPARAM lParam
 			this->_currentMouseX = GET_X_LPARAM(lParam) + (GET_X_LPARAM(lParam)/X_PIXELS_LOST);
 			this->_currentMouseY = GET_Y_LPARAM(lParam) + (GET_Y_LPARAM(lParam)/Y_PIXELS_LOST);
 			this->_Controller->updateMapTileCoordinates(this->_currentMouseX, this->_currentMouseY);
-			//this->_Controller->lookCamera(this->_lastMouseX * 0.001f, this->_lastMouseY * 0.001f);
+
+			this->_Controller->updateCursorPosition(this->_lastMouseX, this->_lastMouseY);
 			break;
 
 		default: //Handle anything not specific to game (program shit)
