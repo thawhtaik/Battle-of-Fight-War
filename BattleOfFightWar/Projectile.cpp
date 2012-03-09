@@ -9,8 +9,11 @@ Projectile::Projectile()
 
 	this->_velocityX = 0;
 	this->_velocityY = 0;
+	this->_facing = 0;
 
 	this->_functional = true;
+	
+	this->_damageType = 0;
 }
 
 void Projectile::update()
@@ -159,7 +162,7 @@ bool Projectile::_hasCollisionOnTile(MapTile* MapTile)
 
 			AnimatedEffectCreator::createBleedingEffect(BloodPosition);
 
-			LivingEntity->damage();
+			LivingEntity->damage(this->_attackPower, this->_damageType, this->_facing);
 			this->_functional = false;
 
 			return true;

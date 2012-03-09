@@ -53,6 +53,7 @@ class Projectile
 
 		long _distanceTravelled;
 		short _attackPower;
+		short _damageType;
 		
 		short _velocityX;
 		short _velocityY;

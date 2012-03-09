@@ -2,8 +2,12 @@
 #define _LIVING_ENTITIES_LIST_
 
 #include "WorldObject.h"
+#include "Map.h"
 
 #include <vector>
+
+extern Map WorldMap;
+
 
 class LivingEntitiesList
 {

@@ -6,6 +6,8 @@
 #include "MapCoordinates.h"
 #include "ActionUser.h"
 #include "AnimatedEffectCreator.h"
+#include "AllConstants.h"
+
 
 class Action
 {

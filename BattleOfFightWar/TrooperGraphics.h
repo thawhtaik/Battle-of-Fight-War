@@ -19,6 +19,7 @@
 #define TROOPER_SPRITE_ROW_SIDE 2
 #define TROOPER_SPRITE_ROW_SOUTHEAST 3
 #define TROOPER_SPRITE_ROW_NORTHEAST 4
+#define TROOPER_SPRITE_ROW_DEATH 5
 
 class TrooperGraphics: public LivingEntityGraphics
 {

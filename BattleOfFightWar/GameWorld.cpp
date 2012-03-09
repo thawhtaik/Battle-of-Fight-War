@@ -95,6 +95,7 @@ void GameWorld::updateGameWorld()
 	GlobalAnimatedEffectsList.update();
 
 	this->_clearAllLivingEntityTilePositions();
+	this->_removeDeadEntities();
 }
 
 
@@ -147,6 +148,28 @@ void GameWorld::_clearLivingEntityTilePosition(LivingEntity* LivingEntity, int e
 		CurrentTile->currentLivingEntityIndices.clear();
 	}
 }
+
+
+void GameWorld::_removeDeadEntities()
+{
+	for (int i = 0; i < GlobalLivingEntitiesList.getSize(); i++) {
+		if (GlobalLivingEntitiesList.getAtIndex(i)->removeFromPlay) {
+			
+			//Removes it from the list
+			GlobalLivingEntitiesList.removeAtIndex(i);
+			this->_playerId--;
+
+			//Recalculate living entity indicies
+			for (int j = 0; j < GlobalLivingEntitiesList.getSize(); j++) {
+				WorldObject* LivingEntity = GlobalLivingEntitiesList.getAtIndex(j);
+				LivingEntity->objectIndex = j;
+			}
+		}
+
+	}
+
+}
+
 
 Player* GameWorld::getPlayer()
 {

@@ -37,11 +37,15 @@ void Trooper::releaseWorldObject()
 	for (int i = 0; i < this->_CurrentActions.size(); i++) {
 		this->_CurrentActions.at(i)->releaseAction();
 	}
+	this->_CurrentActions.clear();
 
 	this->_EntityGraphics->releaseLivingEntityGraphics();
 	delete this->_EntityGraphics;
 	this->_EntityGraphics = NULL;
 	this->_CurrentWeapon = NULL;
+
+	this->_updateFunctionPointer = NULL;
+	this->_moveFunctionPointer = NULL;
 }
 
 void Trooper::setCurrentPath(std::vector<MapCoordinates> NewPath)

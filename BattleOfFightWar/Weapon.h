@@ -8,7 +8,7 @@
 extern Map WorldMap;
 extern LivingEntitiesList GlobalLivingEntitiesList;
 
-#define WEAPON_DAMAGE_RANGE_MELEE 50
+#define WEAPON_damageTarget_RANGE_MELEE 50
 
 #define WEAPON_TYPE_UNARMED 0
 #define WEAPON_TYPE_RIFLE 1
@@ -28,6 +28,7 @@ class Weapon
 	protected:
 		
 		int _attackPower;
+		short _damageType;
 		int _range;
 		int _attackWindUpTime;
 
@@ -36,8 +37,6 @@ class Weapon
 		short _weaponType;
 
 		bool _isTargetInDamageRange(WorldObject* Attacker, WorldObject* AttackTarget);
-		void _damage(WorldObject* AttacdkTarget);
-		
 };
 
 #endif

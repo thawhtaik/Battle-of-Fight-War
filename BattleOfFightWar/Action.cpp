@@ -2,7 +2,7 @@
 
 Action::Action()
 {
-	this->_actionStartTime = timeGetTime();
-
 	this->_ActionUser = NULL;
+
+	this->_timeTick = 0;
 }

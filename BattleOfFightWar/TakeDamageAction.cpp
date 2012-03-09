@@ -1,13 +1,16 @@
 #include "TakeDamageAction.h"
 
-TakeDamageAction::TakeDamageAction(ActionUser* ActionUser)
+TakeDamageAction::TakeDamageAction(ActionUser* ActionUser, int damage, short damageType, short damageDirection)
 {
 	this->_ActionUser = ActionUser;
 
 	this->_actionWindUpTime = 80;
-	this->_damageFinished = false;
+	this->_damageTargetFinished = false;
 	this->_actionStartTime = 0;
 	this->_timeTick = 0;
+
+	this->_damage = damage;
+	this->_damageType = damageType;
 }
 
 void TakeDamageAction::releaseAction()
@@ -18,10 +21,10 @@ void TakeDamageAction::releaseAction()
 
 bool TakeDamageAction::isActionFinished()
 {
-	return this->_damageFinished;
+	return this->_damageTargetFinished;
 }
 
 void TakeDamageAction::doAction()
 {
-	this->_damageFinished = true;
+	this->_damageTargetFinished = true;
 }

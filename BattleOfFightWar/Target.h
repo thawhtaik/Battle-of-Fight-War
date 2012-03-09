@@ -5,7 +5,7 @@ class Target
 {
 
 	public:
-		virtual void damage() = 0;
+		virtual void damage(int damage, short damageType, short damageDirection) = 0;
 };
 
 

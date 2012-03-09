@@ -34,6 +34,7 @@ class Trooper: public LivingEntity
 		void initLivingEntityGraphics();
 
 		void setCurrentPath(std::vector<MapCoordinates> NewPath);
+
 };
 
 #endif

@@ -120,6 +120,9 @@ void TrooperGraphics::setCurrentSpriteFacing(int newFacing)
 			this->_setSpriteValuesForFacing(TROOPER_SPRITE_ROW_NORTHEAST);
 			break;
 	}
+
+	//To "reset" animations given new sprite row values
+	this->setCurrentAnimationState(this->_currentAnimationState);
 }
 
 void TrooperGraphics::animate()
@@ -187,6 +190,25 @@ void TrooperGraphics::setCurrentAnimationState(int newAnimationState)
 			break;
 		case ENTITY_ANIMATION_ATTACK:
 			this->_setSpritesToAttacking();
+			break;
+		case ENTITY_ANIMATION_DYING:
+			switch (this->_currentFacing) {
+				case ENTITY_FACING_SOUTHWEST:
+				case ENTITY_FACING_WEST:
+				case ENTITY_FACING_NORTHWEST:
+				case ENTITY_FACING_NORTH:
+					this->setCurrentSpriteFacing(ENTITY_FACING_WEST);
+					break;
+				default:
+					this->setCurrentSpriteFacing(ENTITY_FACING_EAST);
+					break;
+			}
+			this->Body.endFrame = this->Body.startFrame = this->Body.frame = TROOPER_SPRITE_ROW_DEATH * TROOPER_BODY_SPRITESHEET_NUM_COLUMNS;
+			this->_setSingleFrameSpriteRows(TROOPER_SPRITE_ROW_DEATH);
+			this->Body.height = 50;
+			this->Body.width = 50;
+			this->_HEAD_OFFSET_X = -3;
+			this->_HEAD_OFFSET_Y = 15;
 			break;
 	}
 }
@@ -286,6 +308,6 @@ void TrooperGraphics::_setMirrorValuesForXAxis(float mirrorValue)
 void TrooperGraphics::_setSingleFrameSpriteRows(int row)
 {
 	this->Head.startFrame = this->Head.endFrame = this->Head.frame = row;
-	this->Body.startFrame = this->Body.endFrame = this->Body.frame = TROOPER_BODY_SPRITESHEET_NUM_COLUMNS * row;
+	//this->Body.startFrame = this->Body.endFrame = this->Body.frame = TROOPER_BODY_SPRITESHEET_NUM_COLUMNS * row;
 }
 

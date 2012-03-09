@@ -53,7 +53,7 @@ void Melee::attack(WorldObject* Attacker, MapCoordinates TargetPosition)
 			//Damage target if it's in range
 			WorldObject* TargetLivingEntity = GlobalLivingEntitiesList.getAtIndex(livingEntityIndex);
 			if (this->_isTargetInDamageRange(Attacker, TargetLivingEntity)) {
-				this->_damage(TargetLivingEntity);
+				TargetLivingEntity->damage(this->_attackPower, this->_damageType, 0); //Handle damage direction at some point
 			}
 		}
 	}

@@ -1,11 +1,11 @@
 #include "Bullet.h"
 
-Bullet::Bullet(MapCoordinates NewPosition, MapCoordinates TargetPosition, int newAttackPower, int newVelocity)
+Bullet::Bullet(MapCoordinates NewPosition, MapCoordinates TargetPosition, int newAttackPower, int newVelocity, short newFacing)
 {
 	this->Position = NewPosition;
 	this->_TargetPosition = TargetPosition;
-	
 	this->_attackPower = newAttackPower;
+	this->_facing = newFacing;
 
 	this->_ProjectileSprite = Sprite::Sprite(
 		0, 

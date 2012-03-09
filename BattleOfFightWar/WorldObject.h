@@ -19,6 +19,9 @@ class WorldObject: public Target, public Attacker
 
 		int hitboxSizeX, hitboxSizeY;
 
+		//Death-related
+		bool removeFromPlay;
+
 		virtual bool isPositionInObjectHitbox(MapCoordinates Position) = 0;
 
 		virtual void releaseWorldObject() = 0;
@@ -29,7 +32,6 @@ class WorldObject: public Target, public Attacker
 		virtual int getIndex() = 0;
 		virtual int getPositionX() = 0;
 		virtual int getPositionY() = 0;
-		virtual int getFacing() = 0;
 };
 
 #endif

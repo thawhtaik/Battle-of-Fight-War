@@ -17,6 +17,9 @@ class ActionUser: public WorldObject
 		virtual int getPositionX() = 0;
 		virtual int getPositionY() = 0;
 		virtual int getFacing() = 0;
+		virtual void setPosition(MapCoordinates NewPosition) = 0;
+
+		virtual void removeEntityFromPlay() = 0;
 };
 
 #endif

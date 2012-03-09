@@ -6,15 +6,12 @@
 
 #include "Sprite.h"
 
-extern TexturePack GlobalTexturePack;
-extern DirectXStuff GlobalDirectXStuff;
-
 
 class TakeDamageAction : public Action
 {
 
 	public:
-		TakeDamageAction(ActionUser* ActionUser);
+		TakeDamageAction(ActionUser* ActionUser, int damage, short damageType, short damageDirection);
 		void releaseAction();
 
 		void doAction();
@@ -22,7 +19,10 @@ class TakeDamageAction : public Action
 
 	private:
 
-		bool _damageFinished;
+		int _damage;
+		short _damageType;
+
+		bool _damageTargetFinished;
 };
 
 #endif

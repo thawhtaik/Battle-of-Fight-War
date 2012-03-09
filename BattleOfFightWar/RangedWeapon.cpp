@@ -59,7 +59,7 @@ void RangedWeapon::attack(WorldObject* Attacker, MapCoordinates TargetPosition)
 	Attacker->setAnimationEffect(ANIMATION_EFFECT_MUZZLE_FLASH);
 
 	//Based on weapon type, determine type of bullet to fired heyah
-	Bullet* NewBullet = new Bullet(BulletPosition, TargetPosition, this->_attackPower, 15);
+	Bullet* NewBullet = new Bullet(BulletPosition, TargetPosition, this->_attackPower, 15, facing);
 	GlobalProjectileList.add(NewBullet);
 
 	//Add fired projectile to list of projectiles

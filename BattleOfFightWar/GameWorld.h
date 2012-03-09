@@ -41,6 +41,7 @@ class GameWorld
 
 		void _clearAllLivingEntityTilePositions();
 		void _clearLivingEntityTilePosition(LivingEntity* LivingEntity, int entityIndex);
+		void _removeDeadEntities();
 
 		MapCoordinates _Start;
 		MapCoordinates _Goal;

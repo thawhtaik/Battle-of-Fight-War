@@ -23,9 +23,7 @@ class Player: public Trooper
 		void attack();
 		void update();
 
-	private:
-
-		void _moveBasedOnCurrentMovementDirection();
+		void setCurrentMovementDirection(int newMovementDirection);
 };
 
 #endif

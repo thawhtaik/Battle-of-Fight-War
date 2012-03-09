@@ -14,12 +14,14 @@ LivingEntity::LivingEntity()
 	this->_currentFacing = ENTITY_FACING_SOUTH;
 
 	this->objectIndex = this->sizeX = this->sizeY = this->hitboxSizeX = this->hitboxSizeY = 0;
+
+	this->_updateFunctionPointer = &LivingEntity::_updateNormal;
+	this->_moveFunctionPointer = &LivingEntity::_noMovement;
+
+
+	this->removeFromPlay = false;
 }
 
-void LivingEntity::updateLifeStatus()
-{
-	this->_LifeStatus.update();
-}
 
 void LivingEntity::render()
 {
@@ -33,8 +35,11 @@ void LivingEntity::render()
 
 void LivingEntity::update()
 {
-	this->updateLifeStatus();
+	(this->*_updateFunctionPointer)();
+}
 
+void LivingEntity::_updateNormal()
+{
 	this->_updateCurrentGoal();
 
 	this->_determineCurrentMovementDirection();
@@ -42,8 +47,8 @@ void LivingEntity::update()
 	this->_moveBasedOnCurrentMovementDirection();
 
 	this->_updateEventActions();
-	
 }
+
 
 void LivingEntity::_updateCurrentGoal()
 {
@@ -108,52 +113,113 @@ void LivingEntity::_determineCurrentMovementDirection()
 }
 
 
-void LivingEntity::setCurrentMovementDirection(int newMovementDirection)
+void LivingEntity::_moveBasedOnCurrentMovementDirection()
 {
-	this->_currentMovementDirection = newMovementDirection;
+	(this->*_moveFunctionPointer)();
 }
 
 
-void LivingEntity::_moveBasedOnCurrentMovementDirection()
+void LivingEntity::setCurrentMovementDirection(int newMovementDirection)
 {
+	if (this->_currentMovementDirection == newMovementDirection) {
+		return;
+	}
+
+	this->_currentMovementDirection = newMovementDirection;
+
+	this->_EntityGraphics->setCurrentAnimationState(ENTITY_ANIMATION_RUNNING);
+
 	switch (this->_currentMovementDirection) {
 		case ENTITY_MOVEMENT_NORTH:
-			this->moveEntity(0, -1);
+			this->_moveFunctionPointer = &LivingEntity::_moveNorth;
 			this->_setCurrentFacing(ENTITY_FACING_NORTH);
 			break;
 		case ENTITY_MOVEMENT_SOUTH:
-			this->moveEntity(0, +1);
+			this->_moveFunctionPointer = &LivingEntity::_moveSouth;
 			this->_setCurrentFacing(ENTITY_FACING_SOUTH);
 			break;
 		case ENTITY_MOVEMENT_EAST:
+			this->_moveFunctionPointer = &LivingEntity::_moveEast;
 			this->_setCurrentFacing(ENTITY_FACING_EAST);
-			this->moveEntity(+1, 0);
 			break;
 		case ENTITY_MOVEMENT_WEST:
+			this->_moveFunctionPointer = &LivingEntity::_moveWest;
 			this->_setCurrentFacing(ENTITY_FACING_WEST);
-			this->moveEntity(-1, 0);
 			break;
 		case ENTITY_MOVEMENT_SOUTHEAST:
+			this->_moveFunctionPointer = &LivingEntity::_moveSoutheast;
 			this->_setCurrentFacing(ENTITY_FACING_SOUTHEAST);
-			this->moveEntity(+1, +1);
 			break;
 		case ENTITY_MOVEMENT_SOUTHWEST:
+			this->_moveFunctionPointer = &LivingEntity::_moveSouthwest;
 			this->_setCurrentFacing(ENTITY_FACING_SOUTHWEST);
-			this->moveEntity(-1, +1);
 			break;
 		case ENTITY_MOVEMENT_NORTHEAST:
+			this->_moveFunctionPointer = &LivingEntity::_moveNortheast;
 			this->_setCurrentFacing(ENTITY_FACING_NORTHEAST);
-			this->moveEntity(+1, -1);
 			break;
 		case ENTITY_MOVEMENT_NORTHWEST:
+			this->_moveFunctionPointer = &LivingEntity::_moveNorthwest;
 			this->_setCurrentFacing(ENTITY_FACING_NORTHWEST);
-			this->moveEntity(-1, -1);
 			break;
-
 		case ENTITY_MOVEMENT_IDLE:
 			this->_EntityGraphics->setCurrentAnimationState(ENTITY_ANIMATION_IDLE);
+			this->_moveFunctionPointer = &LivingEntity::_noMovement;
 			break;
 	}
+}
+
+
+void LivingEntity::_moveSouth()
+{
+	this->moveEntity(0, +1);
+}
+
+
+void LivingEntity::_moveNorth()
+{
+	this->moveEntity(0, -1);
+}
+
+
+void LivingEntity::_moveEast()
+{
+	this->moveEntity(+1, 0);
+}
+
+
+void LivingEntity::_moveWest()
+{
+	this->moveEntity(-1, 0);
+}
+
+
+void LivingEntity::_moveSoutheast()
+{
+	this->moveEntity(+1, +1);
+}
+
+
+void LivingEntity::_moveSouthwest()
+{
+	this->moveEntity(-1, +1);
+}
+
+
+void LivingEntity::_moveNortheast()
+{
+	this->moveEntity(+1, -1);
+}
+
+
+void LivingEntity::_moveNorthwest()
+{
+	this->moveEntity(-1, -1);
+}
+
+
+void LivingEntity::_noMovement()
+{
 }
 
 
@@ -161,8 +227,6 @@ void LivingEntity::moveEntity(int addX, int addY)
 {
 	int xDisplacement = abs(addX);
 	int yDisplacement = abs(addY);
-
-	this->_EntityGraphics->setCurrentAnimationState(ENTITY_ANIMATION_RUNNING);
 
 	this->_moveIfPositionNotOccupied(addX, addY);
 }
@@ -212,9 +276,27 @@ void LivingEntity::setCurrentWeapon(short newWeaponType)
 	this->_EntityGraphics->setWeaponType(newWeaponType);
 }
 
+
+//
+// Death
+//
+
+void LivingEntity::_updateDeath()
+{
+	this->_updateEventActions();
+}
+
+
 //
 //ActionUser "interface" methods
 //
+
+void LivingEntity::setPosition(MapCoordinates NewPosition)
+{
+	this->positionX = NewPosition.x;
+	this->positionY = NewPosition.y;
+}
+
 
 int LivingEntity::getPositionX()
 {
@@ -244,6 +326,12 @@ int LivingEntity::getIndex()
 Weapon* LivingEntity::getCurrentWeapon()
 {
 	return this->_CurrentWeapon;
+}
+
+
+void LivingEntity::removeEntityFromPlay()
+{
+	this->removeFromPlay = true;
 }
 
 
@@ -280,10 +368,32 @@ void LivingEntity::attack()
 // Target methods (Target->WorldObject->LivingEntity)
 //
 
-void LivingEntity::damage()
+void LivingEntity::damage(int damage, short damageType, short damageDirection)
 {
-	Action* TakeDamage = new TakeDamageAction(this);
-	this->_CurrentActions.push_back(TakeDamage);
+	/*Action* TakeDamage = new TakeDamageAction(this, damage, damageType);
+	this->_CurrentActions.push_back(TakeDamage);*/
+
+	if (this->_updateFunctionPointer == &LivingEntity::_updateDeath) {
+		return;
+	}
+
+	this->_LifeStatus.damage(damage);
+
+	if (this->_LifeStatus.hitPoints <= 0) {
+		
+		//Set living entity to "dead mode"
+		this->_EntityGraphics->setCurrentAnimationState(ENTITY_ANIMATION_DYING);
+		this->_updateFunctionPointer = &LivingEntity::_updateDeath;
+
+		//Clear all actions since this guy is DEAD
+		for (int i = 0; i < this->_CurrentActions.size(); i++) {
+			this->_CurrentActions.at(i)->releaseAction();
+		}
+		this->_CurrentActions.clear();
+		
+		DieAction* Die = new DieAction(this, damageDirection);
+		this->_CurrentActions.push_back(Die);
+	}
 }
 
 

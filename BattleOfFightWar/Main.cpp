@@ -100,6 +100,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPSTR lpCmdLine,
      
      //display the window
      ShowWindow(window, nCmdShow);
+	 ShowCursor(false);
      UpdateWindow(window);
      
 	 //initialize base directx stuff

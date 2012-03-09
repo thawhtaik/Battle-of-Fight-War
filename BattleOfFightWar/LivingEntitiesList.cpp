@@ -18,6 +18,16 @@ void LivingEntitiesList::releaseLivingEntitiesList()
 	this->_LivingEntities.clear();
 }
 
+
+void LivingEntitiesList::removeAtIndex(int livingEntityIndexIndex)
+{
+	this->_LivingEntities.at(livingEntityIndexIndex)->releaseWorldObject();
+	delete this->_LivingEntities.at(livingEntityIndexIndex);
+
+	this->_LivingEntities.erase(this->_LivingEntities.begin() + livingEntityIndexIndex); //erases element index+1
+}
+
+
 void LivingEntitiesList::add(WorldObject* NewLivingEntity)
 {
 	this->_LivingEntities.push_back(NewLivingEntity);

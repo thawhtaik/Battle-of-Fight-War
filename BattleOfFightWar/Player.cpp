@@ -12,7 +12,6 @@ Player::Player(LivingEntityGraphics* NewLivingEntityGraphics)
 
 void Player::update()
 {
-	this->updateLifeStatus();
 	this->_moveBasedOnCurrentMovementDirection();
 
 	this->_updateEventActions();
@@ -78,36 +77,44 @@ void Player::lookAtPosition(MapCoordinates Position)
 }
 
 
-void Player::_moveBasedOnCurrentMovementDirection()
+void Player::setCurrentMovementDirection(int newMovementDirection)
 {
+	if (this->_currentMovementDirection == newMovementDirection) {
+		return;
+	}
+
+	this->_currentMovementDirection = newMovementDirection;
+
+	this->_EntityGraphics->setCurrentAnimationState(ENTITY_ANIMATION_RUNNING);
+
 	switch (this->_currentMovementDirection) {
 		case ENTITY_MOVEMENT_NORTH:
-			this->moveEntity(0, -1);
+			this->_moveFunctionPointer = &Player::_moveNorth;
 			break;
 		case ENTITY_MOVEMENT_SOUTH:
-			this->moveEntity(0, +1);
+			this->_moveFunctionPointer = &Player::_moveSouth;
 			break;
 		case ENTITY_MOVEMENT_EAST:
-			this->moveEntity(+1, 0);
+			this->_moveFunctionPointer = &Player::_moveEast;
 			break;
 		case ENTITY_MOVEMENT_WEST:
-			this->moveEntity(-1, 0);
+			this->_moveFunctionPointer = &Player::_moveWest;
 			break;
 		case ENTITY_MOVEMENT_SOUTHEAST:
-			this->moveEntity(+1, +1);
+			this->_moveFunctionPointer = &Player::_moveSoutheast;
 			break;
 		case ENTITY_MOVEMENT_SOUTHWEST:
-			this->moveEntity(-1, +1);
+			this->_moveFunctionPointer = &Player::_moveSouthwest;
 			break;
 		case ENTITY_MOVEMENT_NORTHEAST:
-			this->moveEntity(+1, -1);
+			this->_moveFunctionPointer = &Player::_moveNortheast;
 			break;
 		case ENTITY_MOVEMENT_NORTHWEST:
-			this->moveEntity(-1, -1);
+			this->_moveFunctionPointer = &Player::_moveNorthwest;
 			break;
-
 		case ENTITY_MOVEMENT_IDLE:
 			this->_EntityGraphics->setCurrentAnimationState(ENTITY_ANIMATION_IDLE);
+			this->_moveFunctionPointer = &Player::_noMovement;
 			break;
 	}
 }

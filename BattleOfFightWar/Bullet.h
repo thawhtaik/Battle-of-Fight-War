@@ -7,7 +7,7 @@ class Bullet : public Projectile
 {
 
 	public:
-		Bullet(MapCoordinates NewPosition, MapCoordinates TargetPosition, int newAttackPower, int newVelocity);
+		Bullet(MapCoordinates NewPosition, MapCoordinates TargetPosition, int newAttackPower, int newVelocity, short newFacing);
 
 		void render();
 };

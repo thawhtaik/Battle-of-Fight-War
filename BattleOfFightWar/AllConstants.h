@@ -2,10 +2,11 @@
 #define _TROOPER_CONSTANTS_
 
 //
-// General Stuff; ex: math
+// General Stuff; ex: math and physics
 //
 #define PI 3.14159265
 
+#define ENTITY_DEATH_INITIAL_VELOCITY_Y 15
 
 
 //
@@ -14,6 +15,7 @@
 #define ENTITY_ANIMATION_IDLE  0
 #define ENTITY_ANIMATION_RUNNING  1
 #define ENTITY_ANIMATION_ATTACK  2
+#define ENTITY_ANIMATION_DYING 3
 
 #define ENTITY_ANIMATION_DELAY 100
 
